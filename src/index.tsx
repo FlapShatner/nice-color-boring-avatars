@@ -3,27 +3,27 @@ import colors from './colors';
 import Avatar, { AvatarProps } from 'boring-avatars';
 
 interface GeneratedAvatarProps {
-  input: string;
+  name: string;
   size?: number;
   className?: string;
   variant?: AvatarProps['variant'];
 }
 
 function GeneratedAvatar({
-  input,
+  name,
   size,
   variant,
   className,
 }: GeneratedAvatarProps) {
-  const colorsArray = (input: string) => {
-    const colorHash = getColorHash(input ?? '');
+  const colorsArray = (name: string) => {
+    const colorHash = getColorHash(name ?? '');
     return colors[colorHash];
   };
 
-  function getColorHash(input: string): number {
+  function getColorHash(name: string): number {
     let hash = 0;
-    for (let i = 0; i < input.length; i++) {
-      const char = input.charCodeAt(i);
+    for (let i = 0; i < name.length; i++) {
+      const char = name.charCodeAt(i);
       hash = (hash << 5) - hash + char;
       hash |= 0; // Convert to 32bit integer
     }
@@ -34,11 +34,11 @@ function GeneratedAvatar({
 
   return (
     <Avatar
-      className={className}
+      className={className ?? 'boring-avatar'}
       size={size ?? 40}
-      name={input ?? 'default'}
+      name={name ?? 'default'}
       variant={variant ?? 'marble'}
-      colors={colorsArray(input)}
+      colors={colorsArray(name)}
     />
   );
 }
