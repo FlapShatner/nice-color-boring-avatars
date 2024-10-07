@@ -18,8 +18,9 @@ describe('GeneratedAvatar Component', () => {
   });
 
   it('applies custom className', () => {
-    const { container } = render(<GeneratedAvatar name="test" className="custom-class" />);
+    const { container } = render(
+      <GeneratedAvatar name="test" className="custom-class" />
+    );
     expect(container.firstChild).toHaveClass('custom-class');
   });
-
 });
